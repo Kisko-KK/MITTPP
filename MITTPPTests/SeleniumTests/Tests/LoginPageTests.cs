@@ -20,13 +20,11 @@ public class LoginPageTests : IDisposable
     {
         driver.Quit();
     }
-
+    
     [Fact]
     public void LoginWithValidCredentials_ShouldNavigateToProductsPage()
     {
-        loginPage.EnterUsername("standard_user");
-        loginPage.EnterPassword("secret_sauce");
-        loginPage.ClickLoginButton();
+        loginPage.Login("standard_user", "secret_sauce");
 
         Assert.Equal($"{BaseUrl}inventory.html", driver.Url);
     }
@@ -34,10 +32,9 @@ public class LoginPageTests : IDisposable
     [Fact]
     public void LoginWithInvalidCredentials_ShouldNotNavigateToProductsPage()
     {
-        loginPage.EnterUsername("standard_user");
-        loginPage.EnterPassword("12345678");
-        loginPage.ClickLoginButton();
+        loginPage.Login("standard_user", "wrong_password");
 
         Assert.NotEqual($"{BaseUrl}inventory.html", driver.Url);
     }
+    
 }
