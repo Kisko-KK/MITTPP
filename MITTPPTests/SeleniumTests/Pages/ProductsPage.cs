@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
-using System.Threading;
+using System;
+using System.Linq;
 
 namespace MySeleniumTests.Pages
 {
@@ -16,20 +17,22 @@ namespace MySeleniumTests.Pages
         public void ClickAddButton(string productName)
         {
             string specificXPath = $"//*[@id='add-to-cart-{productName.Replace(" ", "-").ToLower()}']";
-            Thread.Sleep(1000);
 
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             By productLocator = By.XPath(specificXPath);
-            driver.FindElement(productLocator).Click();
+            IWebElement addButton = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(productLocator));
+
+            addButton.Click();
         }
 
         public bool IsRemoveButtonDisplayed(string productName)
         {
             string specificXPath = $"//*[@id='remove-{productName.Replace(" ", "-").ToLower()}']";
-            Thread.Sleep(1000);
 
-            IReadOnlyCollection<IWebElement> removeButtons = driver.FindElements(By.XPath(specificXPath));
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            By removeButtonLocator = By.XPath(specificXPath);
 
-            return removeButtons.Any() && removeButtons.First().Displayed;
+            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.PresenceOfAllElementsLocatedBy(removeButtonLocator)).Any();
         }
     }
 }

@@ -44,10 +44,23 @@ namespace SeleniumTests.Tests
             checkoutPage.InputUserInfo("Ante", "Antic", "12345");
 
             checkoutPage.FinishCheckout();
+        }
 
-            string orderConfirmation = checkoutPage.GetOrderConfirmation();
+        [Fact]
+        public void AddTwoItemsToCart_VerifyCheckoutPrice()
+        {
+            productPage.ClickAddButton("Sauce Labs Backpack");
+            productPage.ClickAddButton("Sauce Labs Bike Light");
 
-            Assert.Contains("Your order has been dispatched, and will arrive just as fast as the pony can get there!" ,orderConfirmation);
+            shoppingCartPage.GoToShoppingCart();
+
+            checkoutPage.GoToCheckout();
+
+            checkoutPage.InputUserInfo("Ante", "Antic", "12345");
+
+            string totalPrice = checkoutPage.GetTotalPrice();
+
+            Assert.Equal("Total: $43.18", totalPrice);
         }
 
         public void Dispose()

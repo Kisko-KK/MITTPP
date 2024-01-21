@@ -1,4 +1,6 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
+
 
 public class CheckoutPage
 {
@@ -13,14 +15,14 @@ public class CheckoutPage
     private By continueButton = By.Id("continue");
 
     private By orderConfirmationContainer = By.Id("checkout_complete_container");
+    private By totalPriceLocator = By.XPath("/html/body/div/div/div/div[2]/div/div[2]/div[8]");
 
-    // Constructor
+
     public CheckoutPage(IWebDriver driver)
     {
         this.driver = driver;
     }
 
-    // Action methods
     public void GoToCheckout()
     {
         driver.FindElement(checkoutButton).Click();
@@ -42,12 +44,29 @@ public class CheckoutPage
 
     public string GetOrderConfirmation()
     {
-        Thread.Sleep(300);
+        WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
 
-        IWebElement confirmationContainerElement = driver.FindElement(orderConfirmationContainer);
+        IWebElement confirmationContainerElement = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(orderConfirmationContainer));
 
         string confirmationText = confirmationContainerElement.Text;
 
         return confirmationText;
     }
+
+    public string GetTotalPrice()
+    {
+        // Use WebDriverWait to wait for the element to be present
+        WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+        wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(totalPriceLocator));
+
+        // Find the total price element
+        IWebElement totalPriceElement = driver.FindElement(totalPriceLocator);
+
+        string totalPriceText = totalPriceElement.Text;
+
+        return totalPriceText;
+    }
+
+
+
 }
