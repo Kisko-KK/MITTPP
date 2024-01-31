@@ -31,12 +31,12 @@ Ovaj set Selenium testova provjerava funkcionalnosti prijave na web stranici "[h
 Ovaj Selenium test provjerava funkcionalnost dodavanja proizvoda na već navedenoj web stranici. Test potvrđuje da klik na gumb za dodavanje proizvoda ("Sauce Labs Backpack") rezultira prikazivanjem gumba za uklanjanje proizvoda. Testovi su izvršeni nakon što je korisnik uspješno prijavljen s valjanim podacima.
 
 ![image](https://github.com/Kisko-KK/MITTPP/assets/67562727/a368e412-be58-4829-b611-39b97474b7b8)
-### 4.3 Četvrti testni slučaj
+### 4.4 Četvrti testni slučaj
   
 Ovi Selenium test provjeravaju funkcionalnost dodavanja proizvoda u košaricu. Konkretno, test potvrđuje da dodavanje proizvoda ("Sauce Labs Backpack") rezultira odlaskom na stranicu košarice, ispravno prikazivanje proizvoda u košarici. Testovi su također izvršeni nakon što je korisnik uspješno prijavljen s valjanim podacima.
 
 ![image](https://github.com/Kisko-KK/MITTPP/assets/67562727/ac722884-23ee-4faf-81f0-62c08362c8e6)
-### 4.3 Peti i šesti testni slučaj
+### 4.5 Peti i šesti testni slučaj
 Ovi Selenium testovi provjeravaju proces dodavanja dva proizvoda ("Sauce Labs Backpack" i "Sauce Labs Bike Light") u košaricu. Nakon dodavanja proizvoda u košaricu, testovi nastavljaju s procesom odlaska na blagajnu, unosa korisničkih podataka (ime, prezime, poštanski broj), te zatim dovršavaju proces plaćanja.
 
 Prvi test, "AddTwoItemsToCart_VerifyCheckout", pokriva osnovni tok procesa blagajne, dok drugi test, "AddTwoItemsToCart_VerifyCheckoutPrice", dodatno provjerava točnost ukupne cijene nakon dovršenja procesa plaćanja. Oba testa se također izvršavaju nakon što se korisnik uspješno prijavi s valjanim podacima.
