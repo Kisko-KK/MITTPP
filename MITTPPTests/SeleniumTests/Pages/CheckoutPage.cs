@@ -6,7 +6,6 @@ public class CheckoutPage
 {
     private readonly IWebDriver driver;
 
-    // Locators
     private By firstNameInput = By.Id("first-name");
     private By lastNameInput = By.Id("last-name");
     private By zipCodeInput = By.Id("postal-code");
@@ -55,11 +54,9 @@ public class CheckoutPage
 
     public string GetTotalPrice()
     {
-        // Use WebDriverWait to wait for the element to be present
         WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
         wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(totalPriceLocator));
 
-        // Find the total price element
         IWebElement totalPriceElement = driver.FindElement(totalPriceLocator);
 
         string totalPriceText = totalPriceElement.Text;

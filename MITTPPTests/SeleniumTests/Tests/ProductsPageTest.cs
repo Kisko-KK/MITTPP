@@ -3,33 +3,38 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using Xunit;
 
-public class ProductsPageTests : IDisposable
+namespace SeleniumTests
 {
-    private IWebDriver driver;
-    private readonly ProductsPage productPage;
-    private const string BaseUrl = "https://www.saucedemo.com/";
 
-    public ProductsPageTests()
+
+    public class ProductsPageTests : IDisposable
     {
-        driver = new ChromeDriver();
-        productPage = new ProductsPage(driver);
-        var loginPage = new LoginPage(driver);
+        private IWebDriver driver;
+        private readonly ProductsPage productPage;
+        private const string BaseUrl = "https://www.saucedemo.com/";
 
-        driver.Navigate().GoToUrl(BaseUrl);
+        public ProductsPageTests()
+        {
+            driver = new ChromeDriver();
+            productPage = new ProductsPage(driver);
+            var loginPage = new LoginPage(driver);
 
-        loginPage.Login("standard_user", "secret_sauce");
-    }
+            driver.Navigate().GoToUrl(BaseUrl);
 
-    [Fact]
-    public void ClickAdd_ShouldDisplayRemoveButton()
-    {
-        productPage.ClickAddButton("Sauce Labs Backpack");
+            loginPage.Login("standard_user", "secret_sauce");
+        }
 
-        Assert.True(productPage.IsRemoveButtonDisplayed("Sauce Labs Backpack"));
-    }
-    
-    public void Dispose()
-    {
-        driver.Quit();
+        [Fact]
+        public void ClickAdd_ShouldDisplayRemoveButton()
+        {
+            productPage.ClickAddButton("Sauce Labs Backpack");
+
+            Assert.True(productPage.IsRemoveButtonDisplayed("Sauce Labs Backpack"));
+        }
+
+        public void Dispose()
+        {
+            driver.Quit();
+        }
     }
 }
